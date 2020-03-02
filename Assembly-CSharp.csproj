@@ -63,10 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SCripts\MonoBehaviours\Character.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\Player.cs" />
     <Compile Include="Assets\SCripts\MovementController.cs" />
     <Compile Include="Assets\SCripts\RoundCameraPos.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
@@ -92,17 +97,14 @@
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>C:/MOJO LAPTOP ACTION/EBook Dev 2D Games Unity/2D Top Down/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0f3/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
