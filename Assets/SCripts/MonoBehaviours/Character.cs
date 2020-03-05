@@ -4,7 +4,12 @@ using UnityEngine;
 
 public abstract class Character : MonoBehaviour
 {
+    /*
+     * THIS IS THE TOP LEVEL OF THE CHARACTER CLASS, WHERE ALL LIVE OBJECTS WILL START. 
+     */
+
     //CONFIG PARAMS
-    public int hitPoints;
-    public int maxHitPoints;
+    public HitPoints hitPoints;  //HANDLE TO SCRIPTABLE OBJECT
+    public float startingHitPoints;
+    public float maxHitPoints;
 }

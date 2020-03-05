@@ -10,7 +10,7 @@ public class Item : ScriptableObject
     public Sprite sprite;
     public int quantity;
     public bool stackable;
-
+    //OUR MADE DATA TYPE
     public enum ItemType
     {
         COIN,
@@ -18,5 +18,4 @@ public class Item : ScriptableObject
     }
     //A PROPERTY SETTING WE SET IN THE UNITY INSPECTOR FOR EACH OBJECT OR ITEM WE CREATED.
     public ItemType itemType;
-
 }

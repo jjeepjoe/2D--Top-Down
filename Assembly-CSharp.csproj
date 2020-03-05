@@ -65,10 +65,14 @@
   <ItemGroup>
     <Compile Include="Assets\SCripts\MonoBehaviours\Character.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Consumable.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\HealthBar.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\Inventory\Inventory.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\MovementController.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Player.cs" />
     <Compile Include="Assets\SCripts\RoundCameraPos.cs" />
+    <Compile Include="Assets\SCripts\SCRIPtable OBjects\HitPoints.cs" />
     <Compile Include="Assets\SCripts\SCRIPtable OBjects\Item.cs" />
+    <Compile Include="Assets\SCripts\Slot.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/MOJO UNITY HOME PROJECTS/E-Book Dev 2D Games Unity/2D-Top-Down/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
