@@ -116,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.000000059604645, y: -0.08261025}
@@ -152,7 +152,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1911623716849756374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd38fd5ec1c6014f8ae54d7f0cd8fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: {fileID: 11400000, guid: 3205e8e2d7264b240abcbb29eed87e40, type: 2}
   startingHitPoints: 6
   maxHitPoints: 10
+  hitPoints: {fileID: 11400000, guid: 3205e8e2d7264b240abcbb29eed87e40, type: 2}
   healthBarPrefab: {fileID: 8398749332993456621, guid: 150eb6e87a6c15e4cbd015ab59912e7d,
     type: 3}
   inventoryPrefab: {fileID: 8001892004105551445, guid: 46c9d43655daef9458465094db9751a7,

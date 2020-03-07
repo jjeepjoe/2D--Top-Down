@@ -9,7 +9,19 @@ public abstract class Character : MonoBehaviour
      */
 
     //CONFIG PARAMS
-    public HitPoints hitPoints;  //HANDLE TO SCRIPTABLE OBJECT
+    
     public float startingHitPoints;
     public float maxHitPoints;
-}
+
+    //THIS WILL DESTROY THE ATTACHED GAMEOBJECT.
+    public virtual void KillCharacter()
+    {
+        Destroy(gameObject);
+    }
+    //manditory method for all children
+    public abstract void ResetCharacter();
+
+    //manditory method for all children
+    public abstract IEnumerator DamageCharacter(int damage, float interval);
+
+}   

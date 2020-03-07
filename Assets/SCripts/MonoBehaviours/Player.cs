@@ -5,21 +5,16 @@ using UnityEngine;
 public class Player : Character
 {
     //CONFIG PARAMS
-
-    //PROPERTIES
+    public HitPoints hitPoints;  //HANDLE TO SCRIPTABLE OBJECT
     public HealthBar healthBarPrefab;
     HealthBar healthBar;  //HANDLE TO THE HEALTH BAR SCRIPT
     public Inventory inventoryPrefab;
-    Inventory inventory;
+    Inventory inventory; // Handle to the Inventory script.
 
     private void Start()
     {
         hitPoints.value = startingHitPoints;
-        healthBar = Instantiate(healthBarPrefab);
-        healthBar.character = this;  //THE PLAYER CONNECTION TO THE HEALTH BAR SCRIPT
-        //
-        inventory = Instantiate(inventoryPrefab);
-
+        ResetCharacter();
     }
     //WE INHERIT THE CLASS VARIABLES HITPOINTS FROM THE CHARACTER CLASS
     //LOOKING FOR COLLISIONS
@@ -59,10 +54,47 @@ public class Player : Character
         if(hitPoints.value < maxHitPoints)
         {
             hitPoints.value = hitPoints.value + amount;
-            print("Adjusted hitpoints by: " + amount + ". New value: " + hitPoints.value);
             return true;
         }
         return false;
+    }
+
+    //METHOD needs to be included:
+    public override IEnumerator DamageCharacter(int damage, float interval)
+    {
+        while (true)
+        {
+            hitPoints.value = hitPoints.value - damage;
+            if(hitPoints.value <= float.Epsilon)
+            {
+                KillCharacter();
+                break;
+            }
+            if(interval > float.Epsilon)
+            {
+                yield return new WaitForSeconds(interval);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    //THE BASE KEYWORD USES SOME OF THE ORIGINAL METHOD PLUS WHAT WE ADD.
+    public override void KillCharacter()
+    {
+        base.KillCharacter();
+        Destroy(healthBar.gameObject);
+        Destroy(inventory.gameObject);
+    }
+    //METHOD needs to be included:
+    public override void ResetCharacter()
+    {
+        healthBar = Instantiate(healthBarPrefab);
+        inventory = Instantiate(inventoryPrefab);
+        healthBar.character = this;  //THE PLAYER CONNECTION TO THE HEALTH BAR SCRIPT
+
+        hitPoints.value = startingHitPoints;
     }
 }
 

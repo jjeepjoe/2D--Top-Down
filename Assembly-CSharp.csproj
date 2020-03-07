@@ -63,12 +63,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SCripts\Managers\RPGCameraManager.cs" />
+    <Compile Include="Assets\SCripts\Managers\RPGameManager.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Character.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Consumable.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\Enemy.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\HealthBar.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Inventory\Inventory.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\MovementController.cs" />
     <Compile Include="Assets\SCripts\MonoBehaviours\Player.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\SpawnPoint.cs" />
+    <Compile Include="Assets\SCripts\MonoBehaviours\Wander.cs" />
     <Compile Include="Assets\SCripts\RoundCameraPos.cs" />
     <Compile Include="Assets\SCripts\SCRIPtable OBjects\HitPoints.cs" />
     <Compile Include="Assets\SCripts\SCRIPtable OBjects\Item.cs" />
