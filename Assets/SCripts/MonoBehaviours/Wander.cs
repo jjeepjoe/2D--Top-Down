@@ -14,23 +14,39 @@ public class Wander : MonoBehaviour
     float currentSpeed;
     public float directionChangeInterval; //how often to change directions
     public bool followPlayer; //to toggle the follow mode or not
-    Vector3 endPosition; //the destination
+    Vector3 endPosition; //the random direction destination
     float currentAngle = 0;  //change angle
     //CASHE COMPONENT
     Coroutine moveCoroutine; //so we can control the coroutine.
     Rigidbody2D rb2D;
     Animator animator;
     Transform targetTransform = null; //the Player we are following
+    CircleCollider2D circleCollider;
 
-    //
+    //EDITOR GIZMO FOR VISUAL DEBUG.
+    private void OnDrawGizmos()
+    {
+        if(circleCollider != null)
+        {
+            Gizmos.DrawWireSphere(transform.position, circleCollider.radius);
+        }
+    }
+    //HANDLE THE COMPONENTS
     private void Start()
     {
         animator = GetComponent<Animator>();
         currentSpeed = wanderSpeed;
         rb2D = GetComponent<Rigidbody2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
         StartCoroutine(WanderRoutine());
     }
     //
+    private void Update()
+    {
+        Debug.DrawLine(rb2D.position, endPosition, Color.red);
+    }
+    //THIS IS THE THINKING PART: PICK AN END POINT, THEN AT A SET INTERVAL BAD GUY WILL CHANGE DIRECTIONS,
+    //CHECK IF MOVING ALREADY, STOP, START A NEW MOVE, SAVE THE MOVE CONNECTION.
     public IEnumerator WanderRoutine()
     {
         while (true)
@@ -40,25 +56,37 @@ public class Wander : MonoBehaviour
             {
                 StopCoroutine(moveCoroutine);
             }
-            //
+            //NOT MOVING SO LETS MOVE
             moveCoroutine = StartCoroutine(Move(rb2D, currentSpeed));
             yield return new WaitForSeconds(directionChangeInterval);
         }
     }
-    //
-    void ChooseNewEndpoint()
+    /*
+     * CHOOSE RANDOM NUMBER 0 - 359, ADD IT TO OUR CURRENT DIRECTION. (could be higher than 360.)
+     * Mathf.Repeat: LOOPS THE VALUE SO IT IS NOT GREATER THAN 360.
+     * SETS THE ENDPOINT BY SENDING THE RESULT TO OUR METHOD TO CONVERT ANGLE TO RADIANS.
+     */
+    private void ChooseNewEndpoint()
     {
         currentAngle += Random.Range(0, 360);
         currentAngle = Mathf.Repeat(currentAngle, 360);
         endPosition += Vector3FromAngle(currentAngle);
     }
-    //
+    /*
+     * WE MADE THIS TO DO OUR MATH RADIANS TO VECTORS: TAKES AN ANGLE AND CONVERTS TO RADIANS.
+     * TAKES A PARAMETER AND CONVERTS TO RADIANS, SO THE VECTOR CAN UNDERSTAND.
+     */
     Vector3 Vector3FromAngle(float inputAngleDegrees)
     {
         float inputAngleRadians = inputAngleDegrees * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(inputAngleRadians), Mathf.Sin(inputAngleRadians), 0);
     }
-    //
+    /*
+     * THIS IS THE ACTION ON THE BAD GUY: sqrMagnitude IS A VECTOR3 FUNCTION THAT GETS THE ROUGH DISTANCE CAL.
+     * CHECK THAT > ZERO, IF CHASING THE PLAYER THE TRANSFORM WILL NOT BE NULL.
+     * Vector3.MoveTowards: CALCULATES THE MOVEMENT DIRECTION ONLY, ASSIGN TO A VAR
+     * USE THE sqrMagnitude: TO ROUND OUT THE DIRECTION, THEN ONCE AT POINT STOP ANIMATION.
+     */
     public IEnumerator Move(Rigidbody2D rigidBodyToMove, float speed)
     {
         //sqrMagnitude is a Unity propety to return distance vector math.
@@ -69,6 +97,7 @@ public class Wander : MonoBehaviour
             {
                 endPosition = targetTransform.position;
             }
+            //MAKE SURE WE HAVE THE COMPONENT
             if(rigidBodyToMove != null)
             {
                 animator.SetBool("isWalking", true);
@@ -80,7 +109,40 @@ public class Wander : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
+        //LESS THAN ZERO
         animator.SetBool("isWalking", false);
     }
+    /*
+     * USED TO DETECT THE PLAYER AND CHASE THEM.
+     */
+    private void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        if(otherCollider.gameObject.CompareTag("Player") && followPlayer)
+        {
+            currentSpeed = pursuitSpeed;
+            targetTransform = otherCollider.gameObject.transform;
 
+            if(moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+            }
+            moveCoroutine = StartCoroutine(Move(rb2D, currentSpeed));
+        }
+    }
+    /*
+     * ONCE OUT OF THE COLLIDER RANGE WILL STOP AND WANDER AGAIN.
+     */
+    private void OnTriggerExit2D(Collider2D otherCollder)
+    {
+        if (otherCollder.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool("isWalking", false);
+            currentSpeed = wanderSpeed;
+            if(moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+            }
+            targetTransform = null;
+        }
+    }
 }

@@ -16,6 +16,7 @@ public class Enemy : Character
         //THE BREAK WILL EXIT THE WHILE LOOP.
         while (true)
         {
+            StartCoroutine(FlickerCharacter());
             hitPoints = hitPoints - damage;
             //EPSILON WITH FLOATS PREVENTS ROUNDING ERRORS.
             if(hitPoints <= float.Epsilon)
